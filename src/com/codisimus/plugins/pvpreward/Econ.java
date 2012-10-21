@@ -30,12 +30,14 @@ public class Econ {
      */
     public static boolean takeMoney(String player, double amount) {
         //Cancel if the amount is 0
-        if (amount == 0)
-            return false;
+        if (amount == 0) {
+        	return false;
+        }
         
         //Cancel if the Player can not afford the transaction
-        if (!economy.has(player, amount))
-            return false;
+        if (!economy.has(player, amount)) {
+        	return false;
+        }
 
         economy.withdrawPlayer(player, amount);
         return true;
@@ -50,13 +52,14 @@ public class Econ {
      */
     public static boolean forceTakeMoney(String player, double amount) {
         //Cancel if the amount is 0
-        if (amount == 0)
-            return false;
+        if (amount == 0) {
+        	return false;
+        }
         
         //Ban the Player if they cannot afford the transaction
         if (!economy.has(player, amount)) {
-            PvPReward.server.dispatchCommand(PvPReward.server.getConsoleSender(), "tempban "+player+" 1h");
-            PvPReward.server.broadcastMessage("§5"+player+" was temporarily banned for 1 hour due to Combat Logging!");
+            //PvPReward.server.dispatchCommand(PvPReward.server.getConsoleSender(), "tempban "+player+" 1h");
+            //PvPReward.server.broadcastMessage("§5"+player+" was temporarily banned for 1 hour due to Combat Logging!");
             return false;
         }
 

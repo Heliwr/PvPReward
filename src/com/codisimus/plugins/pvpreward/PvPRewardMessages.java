@@ -85,10 +85,11 @@ public class PvPRewardMessages {
         String msg = deaded.replace("<killed>", killed).replace("<killer>", killer);
         
         //Add '-' before karma values if negative is set to true
-        if (PvPReward.negative && !karma.equals("0"))
-            msg = msg.replace("<karma>", "-"+karma);
-        else
-            msg = msg.replace("<karma>", karma);
+        if (PvPReward.negative && !karma.equals("0")) {
+        	msg = msg.replace("<karma>", "-" + karma);	
+        } else {
+        	msg = msg.replace("<karma>", karma);	
+        }
         
         return msg.replace("<amount>", Econ.format(amount));
     }
@@ -106,10 +107,11 @@ public class PvPRewardMessages {
         String msg = killer.replace("<killed>", killed).replace("<killer>", killerName);
         
         //Add '-' before karma values if negative is set to true
-        if (PvPReward.negative && !karma.equals("0"))
-            msg = msg.replace("<karma>", "-"+karma);
-        else
-            msg = msg.replace("<karma>", karma);
+        if (PvPReward.negative && !karma.equals("0")) {
+        	msg = msg.replace("<karma>", "-" + karma);	
+        } else {
+        	msg = msg.replace("<karma>", karma);	
+        }
         
         return msg.replace("<amount>", Econ.format(amount));
     }
@@ -127,10 +129,11 @@ public class PvPRewardMessages {
         String msg = deadedNotEnoughMoney.replace("<killed>", killed).replace("<killer>", killer);
         
         //Add '-' before karma values if negative is set to true
-        if (PvPReward.negative && !karma.equals("0"))
-            msg = msg.replace("<karma>", "-"+karma);
-        else
-            msg = msg.replace("<karma>", karma);
+        if (PvPReward.negative && !karma.equals("0")) {
+        	msg = msg.replace("<karma>", "-" + karma);	
+        } else {
+        	msg = msg.replace("<karma>", karma);	
+        }
         
         return msg.replace("<amount>", Econ.format(amount));
     }
@@ -148,10 +151,11 @@ public class PvPRewardMessages {
         String msg = killerNotEnoughMoney.replace("<killed>", killed).replace("<killer>", killer);
         
         //Add '-' before karma values if negative is set to true
-        if (PvPReward.negative && !karma.equals("0"))
-            msg = msg.replace("<karma>", "-"+karma);
-        else
-            msg = msg.replace("<karma>", karma);
+        if (PvPReward.negative && !karma.equals("0")) {
+        	msg = msg.replace("<karma>", "-" + karma);	
+        } else {
+        	msg = msg.replace("<karma>", karma);	
+        }
         
         return msg.replace("<amount>", Econ.format(amount));
     }
@@ -168,10 +172,11 @@ public class PvPRewardMessages {
         String msg = outlawBroadcast.replace("<killed>", killed).replace("<killer>", killer);
         
         //Add '-' before karma values if negative is set to true
-        if (PvPReward.negative && !karma.equals("0"))
-            msg = msg.replace("<karma>", "-"+karma);
-        else
-            msg = msg.replace("<karma>", karma);
+        if (PvPReward.negative && !karma.equals("0")) {
+        	msg = msg.replace("<karma>", "-" + karma);	
+        } else {
+        	msg = msg.replace("<karma>", karma);	
+        }
         
         return msg;
     }
@@ -188,10 +193,11 @@ public class PvPRewardMessages {
         String msg = noLongerOutlawBroadcast.replace("<killed>", killed).replace("<killer>", killer);
         
         //Add '-' before karma values if negative is set to true
-        if (PvPReward.negative && !karma.equals("0"))
-            msg = msg.replace("<karma>", "-"+karma);
-        else
-            msg = msg.replace("<karma>", karma);
+        if (PvPReward.negative && !karma.equals("0")) {
+        	msg = msg.replace("<karma>", "-"+karma);	
+        } else {
+        	msg = msg.replace("<karma>", karma);	
+        }
         
         return msg;
     }
@@ -208,10 +214,11 @@ public class PvPRewardMessages {
         String msg = karmaDecreased.replace("<killed>", killed).replace("<killer>", killer);
         
         //Add '-' before karma values if negative is set to true
-        if (PvPReward.negative && !karma.equals("0"))
-            msg = msg.replace("<karma>", "-"+karma);
-        else
-            msg = msg.replace("<karma>", karma);
+        if (PvPReward.negative && !karma.equals("0")) {
+        	msg = msg.replace("<karma>", "-" + karma);	
+        } else {
+        	msg = msg.replace("<karma>", karma);	
+        }
         
         return msg;
     }
@@ -228,10 +235,11 @@ public class PvPRewardMessages {
         String msg = karmaIncreased.replace("<killed>", killed).replace("<killer>", killer);
         
         //Add '-' before karma values if negative is set to true
-        if (PvPReward.negative && !karma.equals("0"))
-            msg = msg.replace("<karma>", "-"+karma);
-        else
-            msg = msg.replace("<karma>", karma);
+        if (PvPReward.negative && !karma.equals("0")) {
+        	msg = msg.replace("<karma>", "-"+karma);	
+        } else {
+        	msg = msg.replace("<karma>", karma);	
+        }
         
         return msg;
     }
@@ -248,10 +256,11 @@ public class PvPRewardMessages {
         String msg = karmaNoChange.replace("<killed>", killed).replace("<killer>", killer);
         
         //Add '-' before karma values if negative is set to true
-        if (PvPReward.negative && !karma.equals("0"))
-            msg = msg.replace("<karma>", "-"+karma);
-        else
-            msg = msg.replace("<karma>", karma);
+        if (PvPReward.negative && !karma.equals("0")) {
+        	msg = msg.replace("<karma>", "-" + karma);	
+        } else {
+        	msg = msg.replace("<karma>", karma);	
+        }
         
         return msg;
     }

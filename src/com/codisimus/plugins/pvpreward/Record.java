@@ -89,11 +89,11 @@ public class Record implements Comparable<Record> {
      */
     private void calculateKDR() {
         //Caculate the new KDR
-        kdr = (double)kills / (deaths == 0 ? 1 : deaths);
+        kdr = (double) kills / (deaths == 0 ? 1 : deaths);
         
         //Remove all but two decimal places
-        long temp = (long)(kdr * 100);
-        kdr = (double)temp / 100;
+        long temp = (long) (kdr * 100);
+        kdr = (double) temp / 100;
     }
     
     /**
@@ -103,14 +103,16 @@ public class Record implements Comparable<Record> {
      */
     public boolean incrementKarma(Player player) {
         //Karma does not change if the Player is offline (they logged during battle)
-        if (!player.isOnline())
-            return false;
+        if (!player.isOnline()) {
+        	return false;	
+        }
         
         karma = karma + 2;
         
         //Return false if the Player's Outlaw status did not change
-        if (karma != outlawLevel + 1 && karma != outlawLevel + 2)
-            return false;
+        if (karma != outlawLevel + 1 && karma != outlawLevel + 2) {
+        	return false;	
+        }
         
         //Add the Player to the Outlaw group if there is one
         if (!outlawGroup.isEmpty()) {
@@ -125,8 +127,9 @@ public class Record implements Comparable<Record> {
         }
 
         //Set the Outlaw tag if there is one
-        if (!outlawTag.isEmpty())
-            player.setDisplayName(outlawTag+name);
+        if (!outlawTag.isEmpty()) {
+        	player.setDisplayName(outlawTag + name);	
+        }
         
         return true;
     }
@@ -138,18 +141,21 @@ public class Record implements Comparable<Record> {
      */
     public boolean decrementKarma(Player player) {
         //Karma does not change if the Player is offline (they logged during battle)
-        if (!player.isOnline())
-            return false;
+        if (!player.isOnline()) {
+        	return false;	
+        }
         
         karma--;
         
         //Do not let karma be negative
-        if (karma < 0)
-            karma = 0;
+        if (karma < 0) {
+        	karma = 0;	
+        }
         
         //Return false if the Player's Outlaw status did not change
-        if (karma != outlawLevel)
-            return false;
+        if (karma != outlawLevel) {
+        	return false;	
+        }
         
         //Move the Player to their previous group if they are in the Outlaw group
         if (PvPReward.permission.playerInGroup(player, outlawGroup)) {
@@ -162,8 +168,9 @@ public class Record implements Comparable<Record> {
         }
 
         //Remove the Outlaw tag if being used
-        if (!outlawTag.isEmpty())
-            player.setDisplayName(name);
+        if (!outlawTag.isEmpty()) {
+        	player.setDisplayName(name);	
+        }
         
         return true;
     }
@@ -189,23 +196,15 @@ public class Record implements Comparable<Record> {
         inCombat = true;
         inCombatWith = player;
         
-        //Start a new thread
-        Thread combat = new Thread() {
-            @Override
+        PvPReward.server.getScheduler().scheduleAsyncDelayedTask(PvPReward.plugin, new Runnable() {
+			@Override
             public void run() {
-                try {
-                    //Leave Record in combat for the given time
-                    Thread.currentThread().sleep(combatTimeOut);
-                    
-                    //Check if combat was started again
-                    if (instance == THIS_INSTANCE)
-                        resetCombat();
-                }
-                catch (Exception e) {
+            	//Check if combat was started again
+            	if (instance == THIS_INSTANCE) {
+            		resetCombat();
                 }
             }
-        };
-        combat.start();
+        }, combatTimeOut * 20L);
     }
 
     /**
@@ -225,20 +224,24 @@ public class Record implements Comparable<Record> {
     public void digGrave(List<ItemStack> dropped, Block lastKnown) {
         grave.clear();
         
-        for (int i = 0; i < dropped.size(); i++)
-            if (dropped.get(i) != null) {
+        for (int i = 0; i < dropped.size(); i++) {
+        	if (dropped.get(i) != null) {
                 grave.add(dropped.get(i));
                 dropped.remove(i);
-            }
+            }	
+        }
         
-        if (grave.isEmpty())
-            return;
+        if (grave.isEmpty()) {
+        	return;	
+        }
         
-        if (signLocation != null)
-            signLocation.getBlock().setTypeId(0);
+        if (signLocation != null) {
+        	signLocation.getBlock().setTypeId(0);	
+        }
         
-        while (lastKnown.getTypeId() != 0)
-            lastKnown = lastKnown.getRelative(BlockFace.UP);
+        while (lastKnown.getTypeId() != 0) {
+        	lastKnown = lastKnown.getRelative(BlockFace.UP);	
+        }
         
         lastKnown.setType(Material.SIGN_POST);
         signLocation = lastKnown.getLocation();
@@ -246,20 +249,13 @@ public class Record implements Comparable<Record> {
         tombstone.setLine(1, "Here Lies");
         tombstone.setLine(2, name);
         
-        //Start a new thread
-        Thread dig = new Thread() {
-            @Override
+        PvPReward.server.getScheduler().scheduleSyncDelayedTask(PvPReward.plugin, new Runnable() {
+			@Override
             public void run() {
-                try {
-                    Thread.currentThread().sleep(graveTimeOut);
-                    signLocation.getBlock().setTypeId(0);
-                    signLocation = null;
-                }
-                catch (Exception e) {
-                }
-            }
-        };
-        dig.start();
+				signLocation.getBlock().setTypeId(0);
+				signLocation = null;
+			}
+        }, graveTimeOut * 20L);
     }
     
     /**
@@ -271,8 +267,9 @@ public class Record implements Comparable<Record> {
     public void robGrave(Player graveRobber) {
         PlayerInventory sack = graveRobber.getInventory();
         
-        for (ItemStack item: grave)
-            sack.addItem(item);
+        for (ItemStack item: grave) {
+        	sack.addItem(item);	
+        }
         
         graveRobber.sendMessage(PvPRewardMessages.getGraveRobMsg());
         signLocation.getBlock().setTypeId(0);
@@ -287,11 +284,12 @@ public class Record implements Comparable<Record> {
      */
     @Override
     public int compareTo(Record rec) {
-        if (kdr < rec.kdr)
-            return 1;
-        else if (kdr > rec.kdr)
-            return -1;
-        else
-            return 0;
+        if (kdr < rec.kdr) {
+        	return 1;	
+        } else if (kdr > rec.kdr) {
+        	return -1;	
+        } else {
+        	return 0;	
+        }
     }
 }
